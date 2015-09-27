@@ -1,0 +1,8 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/Libraries/Ionic/firebaseExample/gulpfile.js",
+        "D:/Libraries/Ionic/firebaseExample/www/lib/ionic/js/ionic.min.js",
+        "D:/Libraries/Ionic/firebaseExample/www/lib/ionic/js/ionic.js",
+        "D:/Libraries/Ionic/firebaseExample/www/lib/ionic/js/ionic.bundle.min.js"
+    ]
+}
