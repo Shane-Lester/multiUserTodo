@@ -1,6 +1,7 @@
 <ion-view title="Todo" ng-init="list()" >
     <ion-nav-buttons side="secondary">
         <button class="button button-small button-royal icon-left ion-log-out" ng-click="logOut()"> Logout</button>
+        <button ng-show="authorised()" class="button button-small button-royal icon-left ion-log-out" ng-click="create()"> New user</button>
     </ion-nav-buttons>
     <div class="sub-header bar button-bar">
         <button class="button button-assertive icon ion-plus" ng-click="openModal()"> New Todo</button>
@@ -10,10 +11,13 @@
             <ion-item ng-repeat="todo in data.todos"  class="ion-icon-left">
                 <i ng-hide="todo.requested"  class="icon ion-android-checkbox-outline-blank" ng-click="requested(todo)"></i>
                 <i ng-show="todo.requested" class="icon ion-android-checkbox-blank"></i>
-                <h4>Wd {{todo.ward}} &nbsp{{todo.title}}</h1>
-               <p>
+                <h4>Wd {{todo.ward}} &nbsp{{todo.title}}</h4>
+               <h3>
                 {{todo.initial}}.{{todo.surname}}
-                   </p>
+                   </h3>
+                <p>
+                    {{todo.task}}
+                </p>
                 <ion-option-button class=" button-small push-right button-dark" ng-click="requested(todo)">
                     Request
                 </ion-option-button>

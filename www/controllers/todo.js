@@ -1,4 +1,4 @@
-angular.module('starter').controller("TodoController", function($scope, $firebaseObject, $firebaseArray, $location ,$ionicPopup, $ionicListDelegate, $ionicModal) {
+angular.module('starter').controller("TodoController", function($scope, $firebaseObject, $firebaseArray, $location ,$ionicPopup, $ionicListDelegate, $ionicModal, $rootScope, $state) {
     $scope.item={};
     $scope.data={todos:[]};
     var toChangeTodo ={};
@@ -15,24 +15,13 @@ angular.module('starter').controller("TodoController", function($scope, $firebas
             }
     }
     
-//    $scope.create = function() {
-//        $ionicPopup.prompt({
-//            title: 'Enter a new TODO item',
-//            inputType: 'text'
-//        })
-//        .then(function(result) {
-//            if(result !== "") {
-//                $scope.data.todos.$add({title: result,
-//                                 user:fb.getAuth().uid,
-//                                 time:Firebase.ServerValue.TIMESTAMP,
-//                                   completed:false,
-//                                requested:false
-//                                       });
-//            } else {
-//                console.log("Action not completed");
-//            }
-//        });
-//    };
+;
+    $scope.authorised = function(){
+        var authorised = ($rootScope.user === $rootScope.admin);
+        console.log (authorised);
+        return authorised;
+    };
+    
     
     
     $scope.addTodo = function (item){
@@ -56,7 +45,12 @@ angular.module('starter').controller("TodoController", function($scope, $firebas
     
     $scope.logOut = function(){
         fb.unauth();
+        $scope.go('login');
     };
+    
+    $scope.create = function(){
+        $state.go('register');
+    }
     
     $scope.delete = function(todo){
         $scope.data.todos.$remove(todo);

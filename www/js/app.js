@@ -6,7 +6,7 @@
 angular.module('starter', ['ionic','firebase']);
 var fb = null;
 
-angular.module('starter').run(function($ionicPlatform, $firebaseAuth, $rootScope,$location) {
+angular.module('starter').run(function($ionicPlatform, $firebaseAuth, $firebaseObject, $rootScope,$location) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -18,10 +18,19 @@ angular.module('starter').run(function($ionicPlatform, $firebaseAuth, $rootScope
     }
 fb = new Firebase("https://luminous-heat-2144.firebaseio.com/");
 fbTodo = new Firebase("https://luminous-heat-2144.firebaseio.com/Todos");
+fbAdmin = new Firebase("https://luminous-heat-2144.firebaseio.com/admin");
+      
       
 $firebaseAuth(fb).$onAuth(function (authData) {
         if (authData) {
+            $rootScope.user= authData.password.email;
             $rootScope.myUsername=authData.password.email.split('@')[0];
+            var obj=  $firebaseObject(fbAdmin);
+            obj.$loaded().then(function(){
+                console.log("Administrator= " +obj.$value);
+                $rootScope.admin = obj.$value;
+            })
+           
             console.log("Logged in as:", $rootScope.myUsername);
             $location.path('/todo');
             
@@ -40,6 +49,11 @@ angular.module('starter').config(function($stateProvider, $urlRouterProvider) {
     .state('login', {
         url: '/login',
         templateUrl: 'templates/login.html',
+        controller: 'LoginController'
+    })
+    .state('register', {
+        url: '/register',
+        templateUrl: 'templates/register.html',
         controller: 'LoginController'
     })
     .state('todo', {

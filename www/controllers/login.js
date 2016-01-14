@@ -15,12 +15,8 @@ angular.module('starter').controller("LoginController", function($scope, $fireba
  
     $scope.register = function(username, password) {
         var fbAuth = $firebaseAuth(fb);
-        fbAuth.$createUser({email: username, password: password}).then(function() {
-            return fbAuth.$authWithPassword({
-                email: username,
-                password: password
-            });
-        }).then(function(authData) {
+        fbAuth.$createUser({email: username, password: password})
+            .then(function(authData) {
             $location.path("/todo");
         }).catch(function(error) {
             console.error("ERROR " + error);
