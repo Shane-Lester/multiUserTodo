@@ -28,14 +28,6 @@ angular.module('starter').controller("TodoController", function($scope, $firebas
         item.completed= false;
         item.requested = false;
         item.user =fb.getAuth().uid;
-//           $scope.data.todos.$add({title: item.task,
-//                                 user:fb.getAuth().uid,
-//                                 ward:item.ward,
-//                                   initial:item.initial,
-//                                   surname:item.surname,
-//                                   completed:false,
-//                                requested:false
-//                                       });
         console.log(item);
 
         $scope.data.todos.$add(item);
